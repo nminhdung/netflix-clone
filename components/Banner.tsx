@@ -4,7 +4,7 @@
 // eslint-disable-next-line jsx-a11y/alt-text
 
 import { baseUrl } from "@/constants/movie";
-import { Movie } from "@/typingd";
+import { Movie } from "@/typings";
 import { InformationCircleIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
