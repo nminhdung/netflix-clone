@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 // eslint-disable-next-line @next/next/no-img-element
+import useAuth from "@/hooks/useAuth";
 import { SearchIcon, BellIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { logout} = useAuth();
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +47,7 @@ const Header = () => {
         <SearchIcon className="hidden w-6 h-6 sm:inline " />
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className=" w-6 h-6" />
-        <Link href="/account">
+        <Link href="/account" onClick={() => logout()}>
           <img
             src="https://rb.gy/g1pwyx"
             alt=""
