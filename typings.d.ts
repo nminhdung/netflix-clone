@@ -32,7 +32,8 @@ export interface Element {
     | "Teaser";
 }
 interface modalState {
-  isModal: boolean;
+  showModal: boolean;
+  movieCurrent: Movie;
 }
 export interface rootState {
   modal: modalState;

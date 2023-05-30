@@ -4,13 +4,14 @@ import styles from "@/styles/Home.module.css";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
 import requests from "@/utils/request";
-import { Movie } from "@/typings";
+import { Movie, rootState } from "@/typings";
 import Row from "@/components/Row";
 import useAuth from "@/hooks/useAuth";
-import { useRecoilValue } from "recoil";
+
 
 import Modal from "@/components/Modal";
-import { modalState } from "@/atoms/modalAtom";
+
+import { useSelector } from "react-redux";
 
 interface Props {
   netflixOriginals: Movie[];
@@ -34,7 +35,7 @@ const Home = ({
   documentaries,
 }: Props) => {
   const { loading } = useAuth();
-  const showModal = useRecoilValue(modalState);
+  const showModal = useSelector((state: rootState) => state.modal.showModal);
 
   if (loading) {
     return "Loading";

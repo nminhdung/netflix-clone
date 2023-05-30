@@ -9,19 +9,23 @@ import {
   XIcon,
 } from "@heroicons/react/solid";
 import { Movie, rootState } from "@/typings";
-import { modalState, movieState } from "@/atoms/modalAtom";
 import { useRecoilState } from "recoil";
 import { Element, Genre } from "@/typings";
 import ReactPlayer from "react-player";
 import { FaPlay } from "react-icons/fa";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentMovie, setShowModal } from "../redux/Modal/modalSlice";
 const Modal = () => {
-  const [movie, setMovie] = useRecoilState(movieState);
-  const [showModal, setShowModal] = useRecoilState(modalState);
+  // const [movie, setMovie] = useRecoilState(movieState);
+  // const [showModal, setShowModal] = useRecoilState(modalState);
+  const dispatch = useDispatch();
+  const movie = useSelector((state: rootState) => state.modal.movieCurrent);
+  const showModal = useSelector((state: rootState) => state.modal.showModal);
+  console.log(movie);
   const [trailer, setTrailer] = useState("");
   const [genres, setGenres] = useState<Genre[]>([]);
   const [muted, setMuted] = useState(true);
-  console.log(movie)
+  // console.log(movie);
   useEffect(() => {
     if (!movie) return;
     const fetchMovie = async () => {
@@ -36,7 +40,7 @@ const Modal = () => {
         const movieTrailer = data.videos.results.find(
           (element: Element) => element.type === "Trailer"
         );
-        // setTrailer(data.videos?.results[index]?.key);  
+        // setTrailer(data.videos?.results[index]?.key);
         setTrailer(movieTrailer?.key);
       }
       if (data?.genres) {
@@ -49,7 +53,7 @@ const Modal = () => {
   console.log(trailer, genres);
 
   const handleClose = () => {
-    setShowModal(false);
+    dispatch(setShowModal(false));
   };
   return (
     <MuiModal

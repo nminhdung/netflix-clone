@@ -1,24 +1,28 @@
 import React from "react";
-import { Movie } from "@/typings";
+import { Movie, rootState } from "@/typings";
 import Image from "next/image";
 import { useRecoilState } from "recoil";
-import { modalState, movieState } from "@/atoms/modalAtom";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentMovie, setShowModal } from "../redux/Modal/modalSlice";
 interface Props {
   movie: Movie;
   //whent using firebase
   //movie: Movie || DocumentData;
 }
 const Thumbnail = ({ movie }: Props) => {
-  const [currentMovie, setCurrentMovie] = useRecoilState(movieState);
-  const [showModal, setShowModal] = useRecoilState(modalState);
 
+  const dispatch = useDispatch();
+  const currentMovie = useSelector(
+    (state: rootState) => state.modal.movieCurrent
+  );
+  const showModal = useSelector((state: rootState) => state.modal.showModal);
   return (
     <div
       className="relative h-28 min-w-[180px] cursor-pointer transition duration-200 
     ease-out md:h-36 md:min-w-[260px] md:hover:scale-105"
       onClick={() => {
-        setCurrentMovie(movie);
-        setShowModal(true);
+        dispatch(setCurrentMovie(movie));
+        dispatch(setShowModal(true));
       }}
     >
       <Image

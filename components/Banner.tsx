@@ -3,24 +3,28 @@
 // eslint-disable-next-line @next/next/no-img-element
 // eslint-disable-next-line jsx-a11y/alt-text
 
-import { modalState, movieState } from "@/atoms/modalAtom";
 import { baseUrl } from "@/constants/movie";
-import { Movie } from "@/typings";
+import { Movie, rootState } from "@/typings";
 import { InformationCircleIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { useRecoilState } from "recoil";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentMovie, setShowModal } from "../redux/Modal/modalSlice";
 interface Props {
   netflixOriginals: Movie[];
 }
 
 const Banner = ({ netflixOriginals }: Props) => {
   const [movie, setMovie] = useState<Movie | null>(null);
-  const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
-  const [showModal, setShowModal] = useRecoilState(modalState)
 
+  const currentMovie = useSelector(
+    (state: rootState) => state.modal.movieCurrent
+  );
+  const showModal = useSelector((state: rootState) => state.modal.showModal);
+  console.log(showModal);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setMovie(
@@ -54,8 +58,8 @@ const Banner = ({ netflixOriginals }: Props) => {
         <button
           className="banner-button bg-[gray]/70"
           onClick={() => {
-            setCurrentMovie(movie);
-            setShowModal(true);
+            dispatch(setCurrentMovie(movie));
+            dispatch(setShowModal(true));
           }}
         >
           <InformationCircleIcon className="h-5 w-5 md:h-8 md:w-8" /> More Info
