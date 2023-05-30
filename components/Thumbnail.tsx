@@ -1,7 +1,6 @@
 import React from "react";
 import { Movie, rootState } from "@/typings";
 import Image from "next/image";
-import { useRecoilState } from "recoil";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentMovie, setShowModal } from "../redux/Modal/modalSlice";
 interface Props {

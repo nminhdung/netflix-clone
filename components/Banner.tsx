@@ -9,7 +9,6 @@ import { InformationCircleIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
-import { useRecoilState } from "recoil";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentMovie, setShowModal } from "../redux/Modal/modalSlice";
 interface Props {

@@ -9,7 +9,6 @@ import {
   XIcon,
 } from "@heroicons/react/solid";
 import { Movie, rootState } from "@/typings";
-import { useRecoilState } from "recoil";
 import { Element, Genre } from "@/typings";
 import ReactPlayer from "react-player";
 import { FaPlay } from "react-icons/fa";
